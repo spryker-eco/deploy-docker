@@ -125,17 +125,17 @@ RUN \
   && rm -rf /var/lib/apt/lists/*
 
 # Nginx configuration
-COPY deploy/docker/nginx/nginx.conf /etc/nginx/nginx.conf
-COPY deploy/docker/nginx/conf.d/* /etc/nginx/conf.d/
-COPY deploy/docker/nginx/fastcgi_params /etc/nginx/fastcgi_params
+COPY nginx/nginx.conf /etc/nginx/nginx.conf
+COPY nginx/conf.d/* /etc/nginx/conf.d/
+COPY nginx/fastcgi_params /etc/nginx/fastcgi_params
 
 # PHP-FPM configuration
 RUN rm -f /usr/local/etc/php-fpm.d/*
-COPY deploy/docker/php/php-fpm.conf /usr/local/etc/php-fpm.conf
-COPY deploy/docker/php/pool.d/*.conf /usr/local/etc/php-fpm.d/
+COPY php/php-fpm.conf /usr/local/etc/php-fpm.conf
+COPY php/pool.d/*.conf /usr/local/etc/php-fpm.d/
 
 # supervisord configuration
-COPY deploy/docker/supervisord.conf /etc/supervisor/supervisord.conf
+COPY supervisord.conf /etc/supervisor/supervisord.conf
 
 # Prepare application
 ARG GITHUB_TOKEN
@@ -143,19 +143,19 @@ ARG GITHUB_TOKEN
 
 RUN install -d -o www-data -g www-data -m 0755 /data /var/www
 #COPY . /data
-ADD . /data
+##ADD . /data
 RUN mkdir -p /data/data/DE/logs
 RUN chown -R www-data:www-data /data
 WORKDIR /data
-COPY deploy/docker/entrypoint.sh /entrypoint.sh
+COPY entrypoint.sh /entrypoint.sh
 
 #The workaround for Azure 4 min timeout
 RUN mkdir -p /etc/nginx/waiting
-COPY deploy/docker/nginx/waiting/waiting_vhost.conf /etc/nginx/waiting/waiting_vhost.conf
-COPY deploy/docker/nginx/waiting/nginx_waiting.conf /etc/nginx/nginx_waiting.conf
+COPY nginx/waiting/waiting_vhost.conf /etc/nginx/waiting/waiting_vhost.conf
+COPY nginx/waiting/nginx_waiting.conf /etc/nginx/nginx_waiting.conf
 #RUN chown -R www-data:www-data /etc/nginx
 
-RUN if [ ! -d vendor ]; then ./build; fi
+##RUN if [ ! -d vendor ]; then ./build; fi
 
 #RUN composer config --global github-protocols https \
 #    && composer config -g github-oauth.github.com $GITHUB_TOKEN \

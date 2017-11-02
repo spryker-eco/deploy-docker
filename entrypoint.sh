@@ -46,17 +46,17 @@ echo "127.0.0.1	$ZED_HOST" >> /etc/hosts
 #npm run zed
 
 # Full app install
-vendor/bin/console setup:install
+##vendor/bin/console setup:install
 
 # Import demo data
-vendor/bin/console data:import
+##vendor/bin/console data:import
 
 # Update product label relation
 ##vendor/bin/console product-label:relations:update
 
 # Run collectors
-vendor/bin/console collector:search:export
-vendor/bin/console collector:storage:export
+##vendor/bin/console collector:search:export
+##vendor/bin/console collector:storage:export
 
 # Setup Jenkins cronjobs
 ##vendor/bin/console setup:jenkins:enable
