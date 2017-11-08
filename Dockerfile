@@ -152,6 +152,7 @@ RUN mkdir -p /data/data/DE/logs
 RUN chown -R www-data:www-data /data
 WORKDIR /data
 COPY entrypoint.sh /entrypoint.sh
+COPY config_local.php.j2 /data/config_local.php.j2
 
 #The workaround for Azure 4 min timeout
 RUN mkdir -p /etc/nginx/waiting
