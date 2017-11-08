@@ -22,7 +22,7 @@ echo "Elasticsearch is available now. Good."
 set -xe
 
 # Generate configuration files
-j2 deploy/docker/config_local.php.j2 > config/Shared/config_local.php
+j2 config_local.php.j2 > config/Shared/config_local.php
 
 # Update Yves and Zed Nginx configuration files with the correct domain names
 j2 /etc/nginx/conf.d/vhost-yves.conf.j2 > /etc/nginx/conf.d/vhost-yves.conf
