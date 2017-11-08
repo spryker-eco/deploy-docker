@@ -77,6 +77,7 @@ RUN \
     ssmtp               \
     supervisor          \
     unzip               \
+    vim                 \
     wget                \
     zip                 \
     openssh-server      \
@@ -84,6 +85,9 @@ RUN \
   && mkdir /var/run/sshd \
   && useradd -m -s /bin/bash -d /data jenkins \
   && echo "jenkins:bigsecretpass" | chpasswd  \
+  ##TODO add user to group www-data
+  ##usermod -a -G www-data jenkins
+  ##chmod g+w /data/data/DE/logs/ZED/application.log
 
 # Install PHP extensions
   && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
