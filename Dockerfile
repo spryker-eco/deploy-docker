@@ -153,6 +153,9 @@ RUN chown -R www-data:www-data /data
 WORKDIR /data
 COPY entrypoint.sh /entrypoint.sh
 COPY config_local.php.j2 /data/config_local.php.j2
+COPY setup_demoshop.sh /data/setup_demoshop.sh
+RUN chmod +x /data/setup_demoshop.sh
+RUN touch /data/initialize
 
 #The workaround for Azure 4 min timeout
 RUN mkdir -p /etc/nginx/waiting

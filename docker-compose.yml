@@ -35,7 +35,7 @@ services:
       RABBITMQ_VHOST: /dockertest
       YVES_HOST: www.de.demoshop.local
       YVES_PROTOCOL: http
-      ZED_HOST: zed.de.demoshop.local
+      ZED_HOST: os.de.demoshop.local
       ZED_PROTOCOL: http
       JENKINS_HOST: jenkins
       JENKINS_PORT: 8080
